@@ -1,5 +1,4 @@
 import os
-# import git
 from unshow import unshow, Node
 
 def get_headings(lines):
@@ -31,7 +30,7 @@ def get_areas(tree, lines):
   line_numbers = [t.i for t in fold(tree)]
   line_areas = list(zip(line_numbers, line_numbers[1:])) + [(line_numbers[-1], len(lines))]
   return line_areas
-  
+
 
 def fold(tree: Node) -> list:
   l = []
@@ -42,9 +41,6 @@ def fold(tree: Node) -> list:
 
 def main():
   print(os.getcwd())
-  # os.chdir('../notes')
-  # g = git.cmd.Git('.')
-  # g.pull()
   tree = make_node_from_file('current.org')
   # with open('current_out.org', "w+") as f:
     # f.write(tree.str())
