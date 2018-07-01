@@ -2,3 +2,5 @@
 current.org
 org-parsed.org
 notes.html
+__pycache__/
+*.pyc
