@@ -22,6 +22,12 @@ class Node:
     text = f'<div {style}><pre>{"".join(x for x in self.text)}</pre></div>'
     children = "".join([c.make_into_html(l + 1) for c in self.c])
     return heading + text + children
+  
+  def org(self, l=0):
+    heading = l * "*" + " " + self.v + '\n'
+    text = "".join(self.text)
+    children = "".join([c.org(l + 1) for c in self.c])
+    return heading + text + children
 
 
 def unshow(tuples) -> Node:

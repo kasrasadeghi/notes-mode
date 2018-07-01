@@ -1,5 +1,6 @@
 import os
 from unshow import unshow, Node
+import difflib
 
 def get_headings(lines):
   headings = []
@@ -39,13 +40,28 @@ def fold(tree: Node) -> list:
     l += fold(c)
   return l
 
+
+def output_diff():
+  with open('current.org') as x:
+    with open('current_out.org') as y:
+      with open('diff.html', 'w+') as outfile:
+        xs, ys = x.readlines(), y.readlines()
+        
+        max_line_length = max(len(l) for l in xs + ys)
+        differ = difflib.HtmlDiff(tabsize=2, wrapcolumn=max_line_length)
+        html = differ.make_file(xs, ys, context=False)
+        outfile.write(html)
+
+
 def main():
   print(os.getcwd())
   tree = make_node_from_file('current.org')
-  # with open('current_out.org', "w+") as f:
-    # f.write(tree.str())
-  with open('notes.html', "w+") as f:
-    f.write(tree.make_into_html())
+  with open('current_out.org', "w+") as f:
+    f.write(tree.org())
+  # with open('notes.html', "w+") as f:
+    # f.write(tree.make_into_html())
+
+  output_diff()  
     
 
 if __name__ == '__main__':
