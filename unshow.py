@@ -7,9 +7,9 @@ class Node:
     self.text = ""
   
   def __str__(self):
-    return self.str(0)
+    return self.str()
 
-  def str(self, l):
+  def str(self, l=0):
     heading = l * "  " + self.v + '\n'
     text = "".join(l * "  " + x for x in self.text)
     children = "".join([c.str(l + 1) for c in self.c])
