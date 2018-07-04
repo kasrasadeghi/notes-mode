@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, render_template
 
-import org_parser
+from pylib import org_parser
 
 
 app = Flask(__name__)
