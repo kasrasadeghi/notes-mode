@@ -1,10 +1,10 @@
 
 class Node:
-  def __init__(self, v, i, c):
+  def __init__(self, v, i, c, text=[]):
     self.v = v # heading
     self.i = i # line number
     self.c = c # children
-    self.text = []
+    self.text = text
   
   def __str__(self):
     return self.str()
@@ -30,9 +30,6 @@ class Node:
       'children': [c.json(l + 1) for c in self.c]
     }
 
-    # if l == 0:
-    #   return json.dumps(d)
-    # else:
     return d
   
   def org(self, l=0):
@@ -48,4 +45,3 @@ class Node:
       l += c.fold()
     return l
 
-  

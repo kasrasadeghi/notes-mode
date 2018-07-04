@@ -15,6 +15,24 @@ def get_headings(lines):
   return headings
 
 
+def parse_dir(dirname):
+  assert os.path.isdir(dirname)
+  
+  nodes = []
+  for filename in os.listdir(dirname):
+    if os.path.isfile(filename):
+      nodes.append(parse_file(filename))
+
+    if os.path.isdir(filename):
+      nodes.append(parse_dir(filename))
+    
+    else:
+      with open(filename) as f:
+        nodes.append(Node(filename, 0, [], f.readlines()))
+  
+  return Node(dirname, 0, nodes)
+  
+
 def parse_file(filename):
   with open(filename) as f:
     lines = f.readlines()
@@ -25,7 +43,7 @@ def parse_file(filename):
   areas = get_areas(tree, lines)
   for area, node in zip(areas, tree.fold()):
     begin, end = area
-    node.text = lines[begin:end - 1] # gather_text(begin, end, lines)
+    node.text = lines[begin:end - 1]
     
   return tree
 
