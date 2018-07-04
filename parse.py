@@ -1,33 +1,36 @@
 from typing import List, Tuple
-
 from util import span
-from node import Node
 
 
-def unshow(tuples) -> Node:
+def unshow(tuples) -> dict:
   return childify(tuples)[0]
 
 
-def childify(tuples: List[Tuple[int, int, str]]) -> List[Node]:
+def read_dict(d: dict, *ks):
+  for k in ks:
+    yield d[k]
+
+
+def childify(headings: List[dict]) -> List[dict]:
   """
-  @param tuples: (level, line number, heading)
+  @param dicts: {level, line number, heading}
   """
-  if tuples == []:
+  if headings == []:
     return []
 
   # you're the first one in the list (subtree)
-  curr_l, curr_i, curr_value = tuples[0]
-  st = tuples[1:]
+  curr_l, curr_i, curr_value = read_dict(headings[0], 'l', 'i', 'v')
+  st = headings[1:]
   assert curr_l == 0
 
   # subtract one from everything after you and anything >= 0 is your child until you hit something that isn't
-  pred_st = [(l - 1, i, v) for l, i, v in st]
+  pred_st = [dict(d, l=d['l']-1) for d in st]
 
   # then separate and make the first negative the start
-  children, pred_rest = span(lambda x: x[0] >= 0, pred_st)
+  children, pred_rest = span(lambda x: x['l'] >= 0, pred_st)
 
-  # add one to everything again to get it back to normal
-  rest = [(l + 1, i, v) for l, i, v in pred_rest]
+  # add one to the rest to parse it in the next childify
+  rest = [dict(d, l=d['l']+1) for d in pred_rest]
 
   # recurse - kasra  
-  return [Node(curr_value, curr_i, childify(children))] + childify(rest)
+  return [{'v': curr_value, 'i': curr_i, 'c': childify(children)}] + childify(rest)

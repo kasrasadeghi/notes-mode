@@ -2,15 +2,16 @@ import os
 import difflib
 import json
 
-from node import Node
+from typing import List
+from node import fold
 from parse import unshow
 
-def get_headings(lines):
+def get_headings(lines) -> List[dict]:
   headings = []
   for i, line in enumerate(lines, 1):
     if line.startswith('*'):
       stars, heading = line.split(' ', 1)
-      headings.append((len(stars), i, heading[:-1]))
+      headings.append({'l': len(stars), 'i': i, 'v': heading[:-1]})
 
   return headings
 
@@ -28,28 +29,31 @@ def parse_dir(dirname):
     
     else:
       with open(filename) as f:
-        nodes.append(Node(filename, 0, [], f.readlines()))
+        nodes.append({'v': filename, 'i': 0, 'c': [], 't': f.readlines()})
   
-  return Node(dirname, 0, nodes)
+  return {'v': dirname, 'i': 0, 'c': nodes}
   
 
 def parse_file(filename):
   with open(filename) as f:
     lines = f.readlines()
   
-  headings = [(0, 0, filename + '\n')] + get_headings(lines)
+  headings = [{'l': 0, 'i': 0, 'v': filename}] + get_headings(lines)
   tree = unshow(headings)
 
   areas = get_areas(tree, lines)
-  for area, node in zip(areas, tree.fold()):
+  for area, node in zip(areas, fold(tree)):
     begin, end = area
-    node.text = lines[begin:end - 1]
+    node['t'] = lines[begin:end - 1]
+  
+  for node in fold(tree):
+    del node['i']
     
   return tree
 
 
 def get_areas(tree, lines):
-  line_numbers = [t.i for t in tree.fold()]
+  line_numbers = [t['i'] for t in fold(tree)]
   line_areas = list(zip(line_numbers, line_numbers[1:])) + [(line_numbers[-1], len(lines))]
   return line_areas
 

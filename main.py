@@ -2,6 +2,7 @@ import os
 import difflib
 
 import org_parser
+from node import org
 
 def output_diff():
   with open('current.org') as x:
@@ -14,16 +15,17 @@ def output_diff():
         html = differ.make_file(xs, ys)
         outfile.write(html)
 
+
 def main():
   print('parsing', os.getcwd())
   tree = org_parser.parse_file('current.org')
   with open('current_out.org', "w+") as f:
-    f.write(tree.org())
+    f.write(org(tree))
   # with open('notes.html', "w+") as f:
     # f.write(tree.make_into_html())
   
   from pprint import pprint
-  pprint(tree.json())
+  pprint(tree)
 
   output_diff()
     
