@@ -22,3 +22,9 @@ div {
 .level4:hover {
   border: solid 5px rgb(240, 223, 175);
 }
+
+.node {
+  display: block;
+  margin-left: 2%;
+  margin-right: 0.5%;
+}

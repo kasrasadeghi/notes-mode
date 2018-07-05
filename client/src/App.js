@@ -40,7 +40,7 @@ export default class App extends Component {
 const Node = ({node, l=0, traj="traj"}) => 
   <div className={"level" + l + " node"} 
        id={traj}
-       style={{display: 'block', 'margin-left': '2%', 'margin-right': '0.5%'}}
+       style={{}}
        >
     <Link to={"#" + traj}><button>{node.v}</button></Link>
     
