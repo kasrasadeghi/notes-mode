@@ -14,6 +14,7 @@
 - make a render that isn't json
   - [x] make it work with jinja templates
   - [x] make it work with react
+  - [x] extracted css from node component
 - traversal
   - [x] scroll
   - [ ] scroll history
