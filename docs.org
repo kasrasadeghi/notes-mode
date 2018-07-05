@@ -1,0 +1,25 @@
+* design decisions
+** the decision between nodes and node+files
+*** TODO
+* features
+- add nodes
+- collapsable
+- traversible
+- links to other stuff
+- tags
+- search
+- images
+- filters
+* TODO list:
+- [x] make a rendered that isn't json
+- [ ] traversal
+- add
+  - [ ] nodes from file
+  - [ ] nodes from textbox
+  - [ ] list from textbox
+- [ ] collapsable
+- [ ] links to other stuff
+- [ ] tags
+- [ ] search
+- [ ] images
+- [ ] filters

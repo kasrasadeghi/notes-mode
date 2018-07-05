@@ -2,7 +2,7 @@
 __pycache__/
 *.pyc
 *.html
-*.org
+current*.org
 .vscode/
 venv
 node_modules/
