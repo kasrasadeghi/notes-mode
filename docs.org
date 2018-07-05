@@ -18,11 +18,13 @@
   - [x] scroll
   - [ ] scroll history
     - [x] unique ids
-    - [ ] nonunique ids 
+    - [x] nonunique ids 
       - [x] generate ids by concatenating parent trajectories
-      - [ ] scroll to the ids
+      - [x] scroll to the ids
     - [ ] click on current link shouldn't push history
     - [ ] doesn't scroll on load from id
+    - [ ] weird alternating edge case
+      - when clicking a link and then another one in alternation, the back button acts strange
   - [ ] enter
   - [ ] enter history
   

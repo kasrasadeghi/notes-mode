@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 
-const scrollOptions = {block: 'start'}
-
-window.onpopstate = e => {
-  // https://stackoverflow.com/questions/824349/modify-the-url-without-reloading-the-page
-  // if (e.state) {
-    let {scroll} = e.state;
-    console.log(e.state);
-    
-    document.getElementById(scroll).scrollIntoView(scrollOptions);
-  // }
-}
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 
 export default class App extends Component {
   constructor() {
@@ -21,6 +15,7 @@ export default class App extends Component {
     }
 
     fetch(' http://' + window.location.hostname + '/current', {
+    // fetch(' http://localhost:5000/current', {
       method: 'GET',
       dataType: 'json'
     })
@@ -35,8 +30,9 @@ export default class App extends Component {
   render() {
     let node = this.state.node;
     return <div>
-      
-      <Node node={node}/>
+      <Router>        
+        <Node node={node}/>
+      </Router>
     </div>;
   }
 }
@@ -46,17 +42,8 @@ const Node = ({node, l=0, traj="traj"}) =>
        id={traj}
        style={{display: 'block', 'margin-left': '2%', 'margin-right': '0.5%'}}
        >
-    <button onClick={() => {
-              let current = 
-                  (window.location.href.endsWith('/')) ? 'traj' :
-                  window.location.href.split('#').slice(-1).pop();
-              
-              window.history.pushState({scroll: current}, undefined, "/#" + traj);
-              console.log('pushing', {scroll: current});
-              document.getElementById(traj).scrollIntoView(scrollOptions);
-            }}>
-      {node.v}
-    </button>
+    <Link to={"#" + traj}><button>{node.v}</button></Link>
+    
     <pre>{node.t.join("")}</pre>
     {node.c.map((c, i) => <Node node={c} l={l+1} traj={traj + i}/>)}
   </div>
