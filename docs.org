@@ -11,8 +11,21 @@
 - images
 - filters
 * TODO list:
-- [x] make a rendered that isn't json
-- [ ] traversal
+- make a render that isn't json
+  - [x] make it work with jinja templates
+  - [x] make it work with react
+- traversal
+  - [x] scroll
+  - [ ] scroll history
+    - [x] unique ids
+    - [ ] nonunique ids 
+      - [x] generate ids by concatenating parent trajectories
+      - [ ] scroll to the ids
+    - [ ] click on current link shouldn't push history
+    - [ ] doesn't scroll on load from id
+  - [ ] enter
+  - [ ] enter history
+  
 - add
   - [ ] nodes from file
   - [ ] nodes from textbox
