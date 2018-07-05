@@ -1,5 +1,6 @@
 from typing import List, Tuple
-from util import span
+
+from .util import span
 
 
 def unshow(tuples) -> dict:

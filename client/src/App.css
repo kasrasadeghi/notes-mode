@@ -1,0 +1,24 @@
+body {
+  background-color: rgb(80, 80, 80);
+}
+b, pre {
+  color: white;
+}
+div {
+  border: solid 5px rgb(80, 80, 80);
+}
+.level0:hover {
+  border: solid 5px rgb(100, 100, 100);
+}
+.level1:hover {
+  border: solid 5px rgb(188, 131, 131);
+}
+.level2:hover{
+  border: solid 5px rgb(143, 188, 143);
+}       
+.level3:hover {
+  border: solid 5px rgb(122, 181, 184);
+}
+.level4:hover {
+  border: solid 5px rgb(240, 223, 175);
+}

@@ -3,8 +3,8 @@ import difflib
 import json
 
 from typing import List
-from node import fold
-from parse import unshow
+from .node import fold
+from .parse import unshow
 
 def get_headings(lines) -> List[dict]:
   headings = []
