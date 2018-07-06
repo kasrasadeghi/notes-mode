@@ -7,6 +7,14 @@ import {
 } from 'react-router-dom';
 import { HashLink as Link } from 'react-router-hash-link';
 
+let scrollToHash = () => {
+  const hash = window.location.hash;
+  const id = (hash) ? hash.slice(1) : '';
+  if (id && document.getElementById(id)) {
+    document.getElementById(id).scrollIntoView();
+  }
+}
+
 export default class App extends Component {
   constructor() {
     super();
@@ -20,9 +28,9 @@ export default class App extends Component {
       dataType: 'json'
     })
     .then(r => r.json())
-    .then(node => 
-      this.setState({node: node})
-    ).catch(e =>
+    .then(node => {
+      this.setState({node: node}, scrollToHash);
+    }).catch(e =>
       alert(e)
     );
   }
