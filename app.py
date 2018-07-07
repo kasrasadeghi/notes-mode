@@ -8,6 +8,8 @@ from pylib import org_parser
 app = Flask(__name__)
 CORS(app)
 
+rootdir = 'notes'
+
 
 @app.route('/current')
 def notes():
@@ -16,6 +18,11 @@ def notes():
 
 @app.route('/')
 def home():
+    return redirect(url_for('root'))
+
+@app.route('/' + rootdir)
+@app.route('/' + rootdir + '/')
+def root():
     return send_from_directory('client/build', filename='index.html')
 
 

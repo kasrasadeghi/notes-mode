@@ -7,6 +7,7 @@ def bash(cmd):
 def main():
     os.chdir('client')
     # print(bash('pwd'))
+    print(bash("npm run-script build-css"))
     print(bash("npm run-script build"))
     os.chdir('..')
     print(bash('rm -rf static'))

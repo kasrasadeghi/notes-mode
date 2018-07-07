@@ -1,0 +1,64 @@
+body {
+  background-color: rgb(80, 80, 80);
+}
+b, pre {
+  margin-top: 2px;
+  color: white;
+}
+
+@borderwidth: solid 5px;
+@bg: rgb(80, 80, 80);
+// @l0: rgb(50, 50, 50);
+@l0: rgb(223, 175, 143);
+@l1: rgb(191, 235, 191);
+@l2: rgb(127, 184, 187);
+@l3: rgb(208, 191, 143);
+@l4: rgb(147, 224, 227);
+@l5: rgb(159, 167, 159);
+@l6: rgb(140, 83, 83);
+@l7: rgb(76, 112, 115);
+
+
+div { border-left: @borderwidth @bg; }
+div.c0:hover { border-left: @borderwidth @l0; }
+div.c1:hover { border-left: @borderwidth @l1; }
+div.c2:hover { border-left: @borderwidth @l2; }       
+div.c3:hover { border-left: @borderwidth @l3; }
+div.c4:hover { border-left: @borderwidth @l4; }
+div.c5:hover { border-left: @borderwidth @l5; }
+div.c6:hover { border-left: @borderwidth @l6; }
+div.c7:hover { border-left: @borderwidth @l7; }
+
+button {
+  border: none;
+  font-family: monospace;
+  font-size: 15px;
+  padding: 5px 8px;
+  text-decoration: none;
+}
+
+button.c { background: rgb(100, 100, 100); }
+button.c0 { color: @l0; }
+button.c1 { color: @l1; }
+button.c2 { color: @l2; }
+button.c3 { color: @l3; }
+button.c4 { color: @l4; }
+button.c5 { color: @l5; }
+button.c6 { color: @l6; }
+button.c7 { color: @l7; }
+
+button.l  { color: @bg }
+button.l0 { background: @l0; }
+button.l1 { background: @l1; }
+button.l2 { background: @l2; }
+button.l3 { background: @l3; }
+button.l4 { background: @l4; }
+button.l5 { background: @l5; }
+button.l6 { background: @l6; }
+button.l7 { background: @l7; }
+
+.node {
+  display: block;
+  margin-left: 2%;
+  margin-right: 0.5%;
+}
