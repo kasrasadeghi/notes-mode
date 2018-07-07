@@ -1,5 +1,13 @@
 * design decisions
-** the decision between nodes and node+files
+** nodes vs node+files
+- files end in .org, folders end in /
+- we'll accomodate nodes+files using the above rule, but we'll just have nodes
+- *winner*: nodes
+** trajectories vs names
+- names are good
+- trajectories enforce structure, not flexible
+- trajectories create excess coupling
+- *winner*: names
 * features
 - add nodes
 - collapsable
