@@ -5,8 +5,8 @@ import React, { Component } from 'react';
 const str = (s) => JSON.stringify(s);
 
 const scrollToHash = () => {
-  const hash = window.location.hash;
-  const id = (hash) ? hash.slice(1) : '';
+  let path = decodeURI(window.location.href.split(window.location.origin)[1]);
+  let id = (path)? '/' + path.split('#')[1] : "";
   if (id && document.getElementById(id)) {
     document.getElementById(id).scrollIntoView();
   }
