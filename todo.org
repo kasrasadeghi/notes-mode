@@ -20,7 +20,7 @@
       - when clicking a link and then another one in alternation, the back button acts strange
       - :/ wikipedia doesn't even handle it
   - [x] enter
-    - [ ] keep colors on enter
+    - [x] keep colors on enter
     - [ ] load from link
       - modify backend to load from arbitrary link
     - [ ] load to largest correct prefix?
