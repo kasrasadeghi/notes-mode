@@ -6,6 +6,9 @@ import {
 } from 'react-router-dom';
 import { HashLink as Link } from 'react-router-hash-link';
 
+const pprint = (s) => JSON.stringify(s, null, 2);
+const str = (s) => JSON.stringify(s);
+
 let scrollToHash = () => {
   const hash = window.location.hash;
   const id = (hash) ? hash.slice(1) : '';
@@ -36,7 +39,7 @@ export default class App extends Component {
       if ('error' in node) {
         throw node['error'];
       }
-      this.setState({node: node, current: node, currentPath: node.v}, scrollToHash)
+      this.setState({root: node, current: node, currentPath: node.v}, scrollToHash)
     } 
     ).catch(e =>
       failure(e)
@@ -44,7 +47,17 @@ export default class App extends Component {
   }
 
   enter(current, currentPath) {
+    window.history.pushState({current: this.state.current, currentPath: this.state.currentPath}, "", "/" + currentPath);
     this.setState({current, currentPath});
+  }
+
+  componentDidMount() {
+    window.history.onpopstate = (e) => {
+      if (e.state) {
+        let {current, currentPath} = e.state;
+        this.setState({current, currentPath});
+      }
+    }
   }
 
   pathToNode(path, root=this.state.root) {
@@ -63,28 +76,29 @@ export default class App extends Component {
 
   render() {
     let current = this.state.current || this.state.root;
+    let path = window.location.pathname.slice(1);
     return <div>
-      <Router>
-        <Route exact path="/:path" render={({match}) => 
-          <div>
-          <pre>{JSON.stringify(match)}</pre>
-          <pre>{JSON.stringify(window.location.path)}</pre>
-          </div>
-          // <Node node={this.pathToNode(match.params.path)} 
-          //       path={match.params.path} 
-          //       enter={(current, currentPath) => this.enter(current, currentPath)}
-          // />
-        }/>
-      </Router>
-    </div>;
+      <pre>{path}</pre>
+      <pre>{str(this.state)}</pre>
+      <pre>{str(this.pathToNode(path))}</pre>
+      <Node node={this.pathToNode(path)}
+            path={path} 
+            enter={(current, currentPath) => this.enter(current, currentPath)}
+      />  
+      
+      </div>
+    ;
   }
 }
 
 
 const Node = ({node, l=0, path=node.v, enter}) => 
   <div className={"c" + l + " node"} id={path} >
-    <Link to={"#" + path}><button className={"c c" + l}>{node.v}</button></Link>
-    <Link to={path}><button onClick={() => enter(node, path)} className={"l l" + l}>enter</button></Link>
+    <button onClick={() => {
+      window.history.pushState({}, "", "#" + path);
+      scrollToHash();
+    }} className={"c c" + l}>{node.v}</button>
+    <button onClick={() => enter(node, path)} className={"l l" + l}>enter</button>
     
     <pre>{node.t.join("")}</pre>
     {node.c.map((c) => 

@@ -20,7 +20,6 @@ def notes():
 def home():
     return redirect(url_for('root'))
 
-@app.route('/' + rootdir)
 @app.route('/' + rootdir + '/')
 def root():
     return send_from_directory('client/build', filename='index.html')
