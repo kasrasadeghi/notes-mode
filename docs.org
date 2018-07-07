@@ -1,6 +1,5 @@
 * design decisions
 ** the decision between nodes and node+files
-*** TODO
 * features
 - add nodes
 - collapsable
@@ -10,38 +9,8 @@
 - search
 - images
 - filters
-* TODO list:
-- make a render that isn't json
-  - [x] make it work with jinja templates
-  - [x] make it work with react
-  - [x] extracted css from node component
-- traversal
-  - [x] scroll
-  - [x] scroll history
-    - [x] unique ids
-    - [x] nonunique ids 
-      - [x] generate ids by concatenating parent trajectories
-      - [x] scroll to the ids
-    - [x] scroll on load from id
-    - [/] click on current link shouldn't push history
-      - :/ that's native behaviour and annoying to change
-    - [/] weird alternating edge case
-      - when clicking a link and then another one in alternation, the back button acts strange
-      - :/ wikipedia doesn't even handle it
-  - [ ] enter
-  - [ ] enter history
-- render and style
-  - [x] react init
-  - [x] emacs colors
-  - [x] border left
-  - [x] nicer buttons
-- add
-  - [ ] nodes from file
-  - [ ] nodes from textbox
-  - [ ] list from textbox
-- [ ] collapsible
-- [ ] links to other stuff
-- [ ] tags
-- [ ] search
-- [ ] images
-- [ ] filters
+- keyboard support
+* overarching goals
+- prefer text, not images
+  - emulate emacs in general
+- try to emulate zenburn theme
