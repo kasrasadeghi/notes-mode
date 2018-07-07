@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
 
-const pprint = (s) => JSON.stringify(s, null, 2);
+// const pprint = (s) => JSON.stringify(s, null, 2);
 const str = (s) => JSON.stringify(s);
 
-let scrollToHash = () => {
+const scrollToHash = () => {
   const hash = window.location.hash;
   const id = (hash) ? hash.slice(1) : '';
   if (id && document.getElementById(id)) {
@@ -18,7 +18,8 @@ export default class App extends Component {
     this.state = {
       root: {v: 'Loading...', 'c': [], 't': []},
       current: undefined,
-      currentPath: undefined
+      currentPath: undefined,
+      history: []
     }
 
     this.getRoot(window.location.hostname, (e) => this.getRoot('localhost:5000'));
@@ -42,24 +43,34 @@ export default class App extends Component {
   }
 
   enter(current, currentPath) {
-    window.history.pushState({current: this.state.current, currentPath: this.state.currentPath}, "", "/" + currentPath);
+    window.history.pushState({current: this.state.current, currentPath: this.state.currentPath}, "", window.location.origin + "/" + currentPath);
+    let history = this.state.history;
+    history.push({current, currentPath});
     this.setState({current, currentPath});
   }
 
   componentDidMount() {
-    window.history.onpopstate = (e) => {
-      if (e.state) {
-        let {current, currentPath} = e.state;
-        this.setState({current, currentPath});
-      }
-    }
+    window.addEventListener('popstate', (e) => {
+      let history = this.state.history;
+      history.pop();
+      // let {current, currentPath} = history.pop();
+      // if (e.state) {
+        // current = e.state.current; 
+        // currentPath = e.state.currentPath;
+      // }
+      let currentPath = window.location.pathname.slice(1);
+      let current = this.pathToNode(currentPath);
+      console.log('popping path to: ', currentPath);
+      this.setState({current, currentPath, history});
+    });
   }
 
   pathToNode(path, root=this.state.root) {
-    console.log(path, root)
+    console.log(path +", "+ root.v + " => ");
     let rest = path.slice(root.v.length);
     console.log(rest);
     if (rest === "") {
+      console.log('  node:', root.v)
       return root;
     }
     for (let c in root.c) {
@@ -73,10 +84,13 @@ export default class App extends Component {
     let current = this.state.current || this.state.root;
     let path = window.location.pathname.slice(1);
     return <div>
-      <pre>{path}</pre>
+      <pre>path: {path}</pre>
+      <pre>root value: {this.state.root.v}</pre>
+      <pre>current value: {(this.state.current)? this.state.current.v : ""}</pre>
+      <pre>current path:  {this.state.currentPath}</pre>
       <pre>{str(this.state)}</pre>
-      <pre>{str(this.pathToNode(path))}</pre>
-      <Node node={this.pathToNode(path)}
+      <pre>{str(this.pathToNode(path, current))}</pre>
+      <Node node={current}
             path={path} 
             enter={(current, currentPath) => this.enter(current, currentPath)}
       />  
