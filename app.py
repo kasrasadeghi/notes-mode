@@ -2,7 +2,7 @@ import os
 from flask import Flask, jsonify, render_template, send_from_directory, redirect, url_for
 from flask_cors import CORS
 
-from pylib import org_parser
+from pylib.org_parser import parse_dir, pathify
 
 
 app = Flask(__name__)
@@ -13,7 +13,7 @@ rootdir = 'notes'
 
 @app.route('/current')
 def notes():
-    return jsonify(org_parser.parse_dir('notes'))
+    return jsonify(pathify(parse_dir('notes')))
     
 
 @app.route('/')
