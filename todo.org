@@ -6,7 +6,7 @@
   - [x] emacs colors
   - [x] border left
   - [x] nicer buttons
-- [ ] traversal
+- [x] traversal
   - [x] scroll buttons
   - [x] scroll history
     - [x] unique ids
