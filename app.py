@@ -11,7 +11,7 @@ CORS(app)
 
 @app.route('/current')
 def notes():
-    return jsonify(org_parser.parse_file('current.org'))
+    return jsonify(org_parser.parse_dir('notes'))
     
 
 @app.route('/')

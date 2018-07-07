@@ -3,11 +3,35 @@
 - files end in .org, folders end in /
 - we'll accomodate nodes+files using the above rule, but we'll just have nodes
 - *winner*: nodes
+*** consequence: parsing paths is a little trickier
+- /folder/filename.org/node1/node2
+- the first one is a folder, then it gets to a file (ends in .org)
+- everything inside a file must be a node, so that's where the / is done away with
+*** consequence: concatenate of path logic is a little complicated as well
+- folder/ + folder2/     => folder/folder2/
+- folder/ + filename.org => folder/filename.org
+- filename.org + node    => filename.org/node
+- node + node            => node/node
+- final: 
+  - path + anything
+    - based on what path ends with:
+      - folder/      => folder paths always end in /
+      - filename.org => file paths always end in .org
+      - node         => node paths always end in neither
+**** consequence: node names can't end in .org or /
+- TODO warn on node names that end in '.org' or '/'
+  - could put a space afterwards
 ** trajectories vs names
 - names are good
 - trajectories enforce structure, not flexible
 - trajectories create excess coupling
 - *winner*: names
+*** how should we handle duplicate sibling names then?
+- sometimes nodes have the same names
+- we should go to the first one that has that name
+- we want the website to still work
+- there's not a good place to put an error message
+- we can put warning bubbles around them later
 * features
 - add nodes
 - collapsable
@@ -18,6 +42,7 @@
 - images
 - filters
 - keyboard support
+- includes
 * overarching goals
 - prefer text, not images
   - emulate emacs in general

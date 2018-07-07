@@ -17,24 +17,30 @@ def get_headings(lines) -> List[dict]:
 
 
 def parse_dir(dirname):
-  assert os.path.isdir(dirname)
+  assert os.path.isdir(dirname), dirname + ' is not a directory in ' + os.getcwd()
   
   nodes = []
   for filename in os.listdir(dirname):
-    if os.path.isfile(filename):
-      nodes.append(parse_file(filename))
+    # path = os.path.join(dirname, filename)
+    path = dirname + '/' + filename
 
-    if os.path.isdir(filename):
-      nodes.append(parse_dir(filename))
+    if os.path.isfile(path):
+      nodes.append(parse_file(path))
+
+    elif os.path.isdir(path):
+      nodes.append(parse_dir(path))
     
     else:
-      with open(filename) as f:
-        nodes.append({'v': filename, 'i': 0, 'c': [], 't': f.readlines()})
+      return {'error': path + " is neither file nor directory in " + os.getcwd()}
+      # with open(path) as f:
+        # nodes.append({'v': filename, 'i': 0, 'c': [], 't': f.readlines()})
   
-  return {'v': dirname, 'i': 0, 'c': nodes}
+  return {'v': dirname + '/', 'i': 0, 'c': nodes, 't': []}
   
 
 def parse_file(filename):
+  assert os.path.isfile(filename), filename + ' is not a file in ' + os.getcwd()
+
   with open(filename) as f:
     lines = f.readlines()
   

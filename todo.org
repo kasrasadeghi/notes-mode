@@ -6,8 +6,8 @@
   - [x] emacs colors
   - [x] border left
   - [x] nicer buttons
-- traversal
-  - [x] scroll
+- [ ] traversal
+  - [x] scroll buttons
   - [x] scroll history
     - [x] unique ids
     - [x] nonunique ids 
@@ -21,7 +21,7 @@
       - :/ wikipedia doesn't even handle it
   - [ ] enter
   - [ ] enter history
-- add
+- [ ] add
   - [ ] nodes from file
   - [ ] nodes from textbox
   - [ ] list from textbox
@@ -33,3 +33,18 @@
 - [ ] filters
 - [ ] keyboard support
 - [ ] grammar implementation
+- [ ] include other files
+  - include /current.org
+    - current.org
+  - [ ] figure out: headers end in '.org'. 
+    - how do we include filenames if the header has to end in '.org'?
+- [ ] speed up build
+  - python flask default environment thingy to change static folder
+- [ ] api integration
+  - [x] parse from folders
+  - [x] send error messages to front end
+  - [ ] field to set api path
+  - [ ] session storage
+    - [ ] of api path?
+    - [ ] of notes?
+- [ ] auth

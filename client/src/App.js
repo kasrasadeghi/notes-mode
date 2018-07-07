@@ -29,31 +29,36 @@ export default class App extends Component {
     })
     .then(r => r.json())
     .then(node => {
-      this.setState({node: node}, scrollToHash);
-    }).catch(e =>
+      if ('error' in node) {
+        throw node['error'];
+      }
+      this.setState({node: node}, scrollToHash)
+    } 
+    ).catch(e =>
       alert(e)
     );
   }
 
   render() {
-    let node = this.state.node;
     return <div>
-      <Router>        
-        <Node node={node}/>
+      <Router>
+        <Node node={this.state.node} path={this.state.node.v}/>
       </Router>
     </div>;
   }
 }
 
-const Node = ({node, l=0, traj="traj"}) => 
+const Node = ({node, l=0, path=node.v}) => 
   <div className={"level" + l + " node"} 
-       id={traj}
+       id={path}
        style={{}}
        >
-    <Link to={"#" + traj}><button className={"level" + l}>{node.v}</button></Link>
+    <Link to={"#" + path}><button className={"level" + l}>{node.v}</button></Link>
     
     <pre>{node.t.join("")}</pre>
-    {node.c.map((c, i) => <Node node={c} l={l+1} traj={traj + i}/>)}
+    {node.c.map((c) => <Node node={c} l={l+1} path={
+      path.endsWith('/') ? path + c.v : path + '/' + c.v
+    }/>)}
   </div>
 
 
