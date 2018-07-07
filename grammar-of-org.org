@@ -8,6 +8,8 @@
     - '[.]', exactly 'IN PROGRESS'
     - '[x]', 'DONE'
     - '[/]', approximated by 'CANCELLED', 'STALLED', 'DELAYED', 'BLOCKED'
+      - can have a child of the form '- :/', which states "this is the reason this has been blocked"
+      - read ':' as 'the reason for'
 - links:
   - '->' denotes a link to another node/file, "internal link"
     - TODO: fix, also denotes a important piece of the doc

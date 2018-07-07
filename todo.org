@@ -19,14 +19,19 @@
     - [/] weird alternating edge case
       - when clicking a link and then another one in alternation, the back button acts strange
       - :/ wikipedia doesn't even handle it
-  - [ ] enter
-  - [ ] enter history
+  - [x] enter
+    - [ ] keep colors on enter
+    - [ ] load from link
+      - modify backend to load from arbitrary link
+    - [ ] load to largest correct prefix?
+  - [x] enter history
 - [ ] add
   - [ ] nodes from file
   - [ ] nodes from textbox
   - [ ] list from textbox
 - [ ] collapsible
 - [ ] links to other stuff
+  - [ ] link to UUID for modification ignoring path changes
 - [ ] tags
 - [ ] search
 - [ ] images
@@ -43,7 +48,11 @@
 - [ ] api integration
   - [x] parse from folders
   - [x] send error messages to front end
-  - [ ] field to set api path
+  - [x] flexible api path
+    - [x] check both localhost and window.location.hostname
+    - [ ] field to set api path
+  - [x] pathify
+  - [ ] levelify
   - [ ] session storage
     - [ ] of api path?
     - [ ] of notes?
