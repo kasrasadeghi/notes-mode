@@ -14,11 +14,12 @@ rootdir = 'notes'
 @app.route('/current')
 def notes():
     return jsonify(levelify(pathify(parse_dir('notes'))))
-    
+
 
 @app.route('/')
 def home():
     return redirect(url_for('root'))
+
 
 @app.route('/' + rootdir + '/')
 def root():
