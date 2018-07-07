@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 // const pprint = (s) => JSON.stringify(s, null, 2);
-// const str = (s) => JSON.stringify(s);
+const str = (s) => JSON.stringify(s);
 
 const scrollToHash = () => {
   const hash = window.location.hash;
@@ -25,8 +25,7 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      root: {v: 'Loading...', 'c': [], 't': []},
-      history: []
+      root: {v: 'Loading...', 'c': [], 't': []}
     }
 
     this.getRoot(window.location.hostname, (e) => this.getRoot('localhost:5000'));
@@ -42,7 +41,7 @@ export default class App extends Component {
       if ('error' in root) {
         throw root['error'];
       }
-      this.setState({root}, scrollToHash)
+      this.setState({root}, scrollToHash);
     } 
     ).catch(e =>
       failure(e)
@@ -51,17 +50,13 @@ export default class App extends Component {
 
   enter(path) {
     window.history.pushState({path}, "", window.location.origin + "/" + path);
-    let history = this.state.history;
-    history.push({path});
-    this.setState({history});
+    this.setState({}, scrollToHash);
   }
 
   componentDidMount() {
     window.addEventListener('popstate', (e) => {
-      let history = this.state.history;
-      history.pop();
       //TODO do something with history?
-      this.setState({history});
+      this.setState({}, scrollToHash);
     });
   }
 
@@ -71,6 +66,7 @@ export default class App extends Component {
 
   render() {
     let path = decodeURI(window.location.href.split(window.location.origin)[1]);
+    path = (path)? path.split('#')[0] : "";
     if (this.state.root.v === 'Loading...') {
       return <div>
           <pre>path: {path}</pre>
