@@ -25,5 +25,10 @@ def root():
     return send_from_directory('client/build', filename='index.html')
 
 
+@app.route('/' + rootdir + '/<path:path>')
+def root2(path):
+    return send_from_directory('client/build', filename='index.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
