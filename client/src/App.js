@@ -42,8 +42,7 @@ export default class App extends Component {
         throw root['error'];
       }
       this.setState({root}, scrollToHash);
-    } 
-    ).catch(e =>
+    }).catch(e =>
       failure(e)
     );
   }
