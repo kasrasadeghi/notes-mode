@@ -60,6 +60,16 @@ def parse_file(path):
   return tree
 
 
+def pathify(node, path=""):
+  if not path.endswith('/'):
+    path += '/'
+  mypath = path + node['v']
+  node['path'] = mypath
+  for c in node['c']:
+    pathify(c, mypath)
+  return node
+
+
 def get_areas(tree, lines):
   line_numbers = [t['i'] for t in fold(tree)]
   line_areas = list(zip(line_numbers, line_numbers[1:])) + [(line_numbers[-1], len(lines))]

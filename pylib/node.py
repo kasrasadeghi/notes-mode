@@ -23,8 +23,7 @@ def org(d, l=0):
 
 
 def fold(d) -> list:
-    l = []
-    l.append(d)
-    for c in d['c']:
-      l += fold(c)
-    return l
+  l = [d]
+  for c in d['c']:
+    l += fold(c)
+  return l

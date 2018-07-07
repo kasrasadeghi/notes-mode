@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 // const pprint = (s) => JSON.stringify(s, null, 2);
-const str = (s) => JSON.stringify(s);
+// const str = (s) => JSON.stringify(s);
 
 const scrollToHash = () => {
   const hash = window.location.hash;
@@ -12,13 +12,21 @@ const scrollToHash = () => {
   }
 }
 
+const fold = (node) => {
+  let l = [];
+  l.push(node);
+  for (let c of node.c) {
+    console.log(c);
+    l = l.concat(fold(c));
+  }
+  return l
+}
+
 export default class App extends Component {
   constructor() {
     super();
     this.state = {
       root: {v: 'Loading...', 'c': [], 't': []},
-      current: undefined,
-      currentPath: undefined,
       history: []
     }
 
@@ -31,89 +39,79 @@ export default class App extends Component {
       dataType: 'json'
     })
     .then(r => r.json())
-    .then(node => {
-      if ('error' in node) {
-        throw node['error'];
+    .then(root => {
+      if ('error' in root) {
+        throw root['error'];
       }
-      this.setState({root: node, current: node, currentPath: node.v}, scrollToHash)
+      this.setState({root}, scrollToHash)
     } 
     ).catch(e =>
       failure(e)
     );
   }
 
-  enter(current, currentPath) {
-    window.history.pushState({current: this.state.current, currentPath: this.state.currentPath}, "", window.location.origin + "/" + currentPath);
+  enter(path) {
+    window.history.pushState({path}, "", window.location.origin + "/" + path);
     let history = this.state.history;
-    history.push({current, currentPath});
-    this.setState({current, currentPath});
+    history.push({path});
+    this.setState({history});
   }
 
   componentDidMount() {
     window.addEventListener('popstate', (e) => {
       let history = this.state.history;
       history.pop();
-      // let {current, currentPath} = history.pop();
-      // if (e.state) {
-        // current = e.state.current; 
-        // currentPath = e.state.currentPath;
-      // }
-      let currentPath = window.location.pathname.slice(1);
-      let current = this.pathToNode(currentPath);
-      console.log('popping path to: ', currentPath);
-      this.setState({current, currentPath, history});
+      //TODO do something with history?
+      this.setState({history});
     });
   }
 
   pathToNode(path, root=this.state.root) {
-    console.log(path +", "+ root.v + " => ");
-    let rest = path.slice(root.v.length);
-    console.log(rest);
-    if (rest === "") {
-      console.log('  node:', root.v)
-      return root;
-    }
-    for (let c in root.c) {
-      if (rest.startsWith(c.v)) {
-        return this.pathToNode(rest, c);
-      }
-    }
+    return fold(root).filter(n => n.path === path)[0];
   }
 
   render() {
-    let current = this.state.current || this.state.root;
-    let path = window.location.pathname.slice(1);
-    return <div>
-      <pre>path: {path}</pre>
-      <pre>root value: {this.state.root.v}</pre>
-      <pre>current value: {(this.state.current)? this.state.current.v : ""}</pre>
-      <pre>current path:  {this.state.currentPath}</pre>
-      <pre>{str(this.state)}</pre>
-      <pre>{str(this.pathToNode(path, current))}</pre>
-      <Node node={current}
-            path={path} 
-            enter={(current, currentPath) => this.enter(current, currentPath)}
-      />  
-      
-      </div>
-    ;
+    let path = decodeURI(window.location.pathname);
+    if (this.state.root.v === 'Loading...') {
+      return <div>
+          <pre>path: {path}</pre>
+          <pre>root value: {this.state.root.v}</pre>
+          <button className='c' style={{color: 'rgb(230, 230, 230)'}}>Loading...</button>
+        </div>;
+    }
+
+    let current = this.pathToNode(path);
+
+    if (current) {
+      return <div>
+        <pre>path: {path}</pre>
+        <pre>root value: {this.state.root.v}</pre>
+        <Node node={current}
+              path={path} 
+              enter={(currentPath) => this.enter(currentPath)}
+        />
+      </div>;
+    } else {
+      return <pre>
+          fix your path: {path}
+        </pre>;
+    }
   }
 }
 
 
-const Node = ({node, l=0, path=node.v, enter}) => 
-  <div className={"c" + l + " node"} id={path} >
+const Node = ({node, l=0, enter}) => 
+  <div className={"c" + l + " node"} id={node.path} >
     <button onClick={() => {
-      window.history.pushState({}, "", "#" + path);
+      window.history.pushState({}, "", "#" + node.path.slice(1));
       scrollToHash();
     }} className={"c c" + l}>{node.v}</button>
-    <button onClick={() => enter(node, path)} className={"l l" + l}>enter</button>
+    <button onClick={() => enter(node.path.slice(1))} className={"l l" + l}>enter</button>
     
     <pre>{node.t.join("")}</pre>
     {node.c.map((c) => 
       <Node node={c} 
             l={l+1} 
-            path={path.endsWith('/') ? path + c.v : path + '/' + c.v}
             enter={enter}
       />)}
   </div>
