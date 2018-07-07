@@ -10,6 +10,7 @@
     - '[/]', approximated by 'CANCELLED', 'STALLED', 'DELAYED', 'BLOCKED'
 - links:
   - '->' denotes a link to another node/file, "internal link"
+    - TODO: fix, also denotes a important piece of the doc
   - a node with a single child that starts with http:// or https:// is a link, "external link"
   - backwards compatibility: [[link][title]] org-mode link, both internal and external link
   - '_text_' is underline
