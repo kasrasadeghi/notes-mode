@@ -5,6 +5,6 @@ diff.html
 notes.html
 current*.org
 .vscode/
-venv
+venv/
 node_modules/
 static/
