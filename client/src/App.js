@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
 
-import {
-  BrowserRouter as Router,
-  Route
-} from 'react-router-dom';
-import { HashLink as Link } from 'react-router-hash-link';
 
 const pprint = (s) => JSON.stringify(s, null, 2);
 const str = (s) => JSON.stringify(s);
