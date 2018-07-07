@@ -21,7 +21,7 @@
       - :/ wikipedia doesn't even handle it
   - [x] enter
     - [x] keep colors on enter
-    - [ ] load from link
+    - [x] load from link
       - modify backend to load from arbitrary link
     - [ ] load to largest correct prefix?
   - [x] enter history
@@ -31,7 +31,7 @@
   - [ ] list from textbox
 - [ ] collapsible
 - [ ] links to other stuff
-  - [ ] link to UUID for modification ignoring path changes
+  - [ ] link to UUID for modification-agnostic node
 - [ ] tags
 - [ ] search
 - [ ] images
