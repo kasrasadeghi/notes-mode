@@ -38,12 +38,14 @@ def parse_dir(dirname):
   return {'v': dirname + '/', 'i': 0, 'c': nodes, 't': []}
   
 
-def parse_file(filename):
-  assert os.path.isfile(filename), filename + ' is not a file in ' + os.getcwd()
+def parse_file(path):
+  assert os.path.isfile(path), path + ' is not a file in ' + os.getcwd()
 
-  with open(filename) as f:
+  with open(path) as f:
     lines = f.readlines()
   
+  filename = path.rsplit('/', 1)[1]
+
   headings = [{'l': 0, 'i': 0, 'v': filename}] + get_headings(lines)
   tree = unshow(headings)
 
