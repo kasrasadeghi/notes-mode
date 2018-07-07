@@ -70,6 +70,13 @@ def pathify(node, path=""):
   return node
 
 
+def levelify(node, l=0):
+  node['l'] = l
+  for c in node['c']:
+    levelify(c, l+1)
+  return node
+
+
 def get_areas(tree, lines):
   line_numbers = [t['i'] for t in fold(tree)]
   line_areas = list(zip(line_numbers, line_numbers[1:])) + [(line_numbers[-1], len(lines))]

@@ -100,18 +100,17 @@ export default class App extends Component {
 }
 
 
-const Node = ({node, l=0, enter}) => 
-  <div className={"c" + l + " node"} id={node.path} >
+const Node = ({node, enter}) => 
+  <div className={"c" + node.l + " node"} id={node.path} >
     <button onClick={() => {
       window.history.pushState({}, "", "#" + node.path.slice(1));
       scrollToHash();
-    }} className={"c c" + l}>{node.v}</button>
-    <button onClick={() => enter(node.path.slice(1))} className={"l l" + l}>enter</button>
+    }} className={"c c" + node.l}>{node.v}</button>
+    <button onClick={() => enter(node.path.slice(1))} className={"l l" + node.l}>enter</button>
     
     <pre>{node.t.join("")}</pre>
     {node.c.map((c) => 
-      <Node node={c} 
-            l={l+1} 
+      <Node node={c}
             enter={enter}
       />)}
   </div>

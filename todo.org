@@ -52,7 +52,7 @@
     - [x] check both localhost and window.location.hostname
     - [ ] field to set api path
   - [x] pathify
-  - [ ] levelify
+  - [x] levelify
   - [ ] session storage
     - [ ] of api path?
     - [ ] of notes?
