@@ -32,3 +32,4 @@
 - [ ] images
 - [ ] filters
 - [ ] keyboard support
+- [ ] grammar implementation
