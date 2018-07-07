@@ -16,7 +16,6 @@ const fold = (node) => {
   let l = [];
   l.push(node);
   for (let c of node.c) {
-    console.log(c);
     l = l.concat(fold(c));
   }
   return l
@@ -71,7 +70,7 @@ export default class App extends Component {
   }
 
   render() {
-    let path = decodeURI(window.location.pathname);
+    let path = decodeURI(window.location.href.split(window.location.origin)[1]);
     if (this.state.root.v === 'Loading...') {
       return <div>
           <pre>path: {path}</pre>
