@@ -1,0 +1,18 @@
+* grammar
+- '*' denotes a heading
+- '-' denotes a list item
+- ':' at the end, denotes that the children are of a class
+- state:
+  - TODO:
+    - '[ ]', 'TODO'
+    - '[.]', exactly 'IN PROGRESS'
+    - '[x]', 'DONE'
+    - '[/]', approximated by 'CANCELLED', 'STALLED', 'DELAYED', 'BLOCKED'
+- links:
+  - '->' denotes a link to another node/file, "internal link"
+  - a node with a single child that starts with http:// or https:// is a link, "external link"
+  - backwards compatibility: [[link][title]] org-mode link, both internal and external link
+  - '_text_' is underline
+  - '-text-' is strikethrough
+  - '/text/' is italics
+  - '*text*' is bold
