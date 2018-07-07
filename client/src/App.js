@@ -22,8 +22,11 @@ export default class App extends Component {
       node: {v: 'Loading...', 'c': [], 't': []}
     }
 
-    fetch(' http://' + window.location.hostname + '/current', {
-    // fetch(' http://localhost:5000/current', {
+    this.getRoot(window.location.hostname, (e) => this.getRoot('localhost:5000'));
+  }
+
+  getRoot(hostname, failure=(e) => alert(e)) {
+    fetch(' http://' + hostname + '/current', {
       method: 'GET',
       dataType: 'json'
     })
@@ -35,7 +38,7 @@ export default class App extends Component {
       this.setState({node: node}, scrollToHash)
     } 
     ).catch(e =>
-      alert(e)
+      failure(e)
     );
   }
 
