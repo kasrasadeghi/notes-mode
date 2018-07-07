@@ -37,7 +37,7 @@
   - [ ] nodes from file
   - [ ] nodes from textbox
   - [ ] list from textbox
-- [ ] collapsable
+- [ ] collapsible
 - [ ] links to other stuff
 - [ ] tags
 - [ ] search
