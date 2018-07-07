@@ -1,8 +1,6 @@
 .vs/
 __pycache__/
 *.pyc
-diff.html
-notes.html
 current*.org
 .vscode/
 venv/
