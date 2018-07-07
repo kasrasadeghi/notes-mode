@@ -2,26 +2,53 @@ body {
   background-color: rgb(80, 80, 80);
 }
 b, pre {
+  margin-top: 2px;
   color: white;
 }
 div {
-  border: solid 5px rgb(80, 80, 80);
+  border-left: solid 5px rgb(80, 80, 80);
 }
-.level0:hover {
-  border: solid 5px rgb(100, 100, 100);
+div.level0:hover {
+  border-left: solid 5px rgb(100, 100, 100);
 }
-.level1:hover {
-  border: solid 5px rgb(188, 131, 131);
+div.level1:hover {
+  border-left: solid 5px rgb(188, 131, 131);
 }
-.level2:hover{
-  border: solid 5px rgb(143, 188, 143);
+div.level2:hover{
+  border-left: solid 5px rgb(143, 188, 143);
 }       
-.level3:hover {
-  border: solid 5px rgb(122, 181, 184);
+div.level3:hover {
+  border-left: solid 5px rgb(122, 181, 184);
 }
-.level4:hover {
-  border: solid 5px rgb(240, 223, 175);
+div.level4:hover {
+  border-left: solid 5px rgb(240, 223, 175);
 }
+
+button {
+  border: none;
+  font-family: monospace;
+  color: #ffffff;
+  font-size: 15px;
+  padding: 5px 8px;
+  text-decoration: none;
+}
+
+button.level0 {
+  background: rgb(100, 100, 100);
+}
+button.level1 {
+  background: rgb(188, 131, 131);
+}
+button.level2 {
+  background: rgb(143, 188, 143);
+}
+button.level3 {
+  background: rgb(122, 181, 184);
+}
+button.level4 {
+  background: rgb(240, 223, 175);
+}
+
 
 .node {
   display: block;

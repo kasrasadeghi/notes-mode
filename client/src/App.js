@@ -50,7 +50,7 @@ const Node = ({node, l=0, traj="traj"}) =>
        id={traj}
        style={{}}
        >
-    <Link to={"#" + traj}><button>{node.v}</button></Link>
+    <Link to={"#" + traj}><button className={"level" + l}>{node.v}</button></Link>
     
     <pre>{node.t.join("")}</pre>
     {node.c.map((c, i) => <Node node={c} l={l+1} traj={traj + i}/>)}

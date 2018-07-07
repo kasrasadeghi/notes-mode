@@ -28,7 +28,11 @@
       - when clicking a link and then another one in alternation, the back button acts strange
   - [ ] enter
   - [ ] enter history
-  
+- render and style
+  - [x] react init
+  - [x] emacs colors
+  - [x] border left
+  - [x] nicer buttons
 - add
   - [ ] nodes from file
   - [ ] nodes from textbox
