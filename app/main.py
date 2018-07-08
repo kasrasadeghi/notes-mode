@@ -23,11 +23,13 @@ def home():
 
 @app.route('/' + rootdir + '/')
 def root():
+    #return 'hello world'
     return send_from_directory('client/build', filename='index.html')
 
 
 @app.route('/' + rootdir + '/<path:path>')
 def root2(path):
+    #return 'hello world'
     return send_from_directory('client/build', filename='index.html')
 
 
